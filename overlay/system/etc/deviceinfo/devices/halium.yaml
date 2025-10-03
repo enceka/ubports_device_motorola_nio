@@ -10,6 +10,10 @@ nio:
     - InvertedLandscape
   DoubleTapToWake:
     - "/sys/class/touchscreen/primary/gesture|49|48"
+  FlashlightSysfsPath:
+    - "/sys/class/leds/led:torch_0/brightness"
+  FlashlightSwitchPath:
+    - "/sys/class/leds/led:switch_0/brightness"
   MirAndroidPlatformServerBackpressure:
     - false
   MirAndroidPlatformServerPartialUpdates:

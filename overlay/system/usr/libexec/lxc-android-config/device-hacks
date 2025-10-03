@@ -1,5 +1,12 @@
 #!/bin/sh
 
+# Fixup flashlight
+chown system:android_input /sys/class/leds/led:torch_0/brightness
+chown system:android_input /sys/class/leds/led:switch_0/brightness
+
+chmod 666 /sys/class/leds/led:torch_0/brightness
+chmod 666 /sys/class/leds/led:switch_0/brightness
+
 # Load device-specific kernel modules (audio)
 for mod in adsp_loader_dlkm apr_dlkm bolero_cdc_dlkm hdmi_dlkm machine_dlkm \
            mbhc_dlkm native_dlkm pinctrl_lpi_dlkm pinctrl_wcd_dlkm platform_dlkm \
