@@ -8,6 +8,8 @@ nio:
     - Portrait
     - Landscape
     - InvertedLandscape
+  DoubleTapToWake:
+    - "/sys/class/touchscreen/primary/gesture|49|48"
   MirAndroidPlatformServerBackpressure:
     - false
   MirAndroidPlatformServerPartialUpdates:
