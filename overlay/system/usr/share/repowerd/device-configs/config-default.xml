@@ -7,6 +7,91 @@ SPDX-License-Identifier: Apache-2.0
     <!-- Enable automatic brightness -->
     <bool name="config_automatic_brightness_available">true</bool>
 
+    <!-- Array of light sensor LUX values to define our levels for auto backlight brightness support.
+    The N entries of this array define N + 1 control points as follows:
+    (1-based arrays)
+
+    Point 1:            (0, value[1]):             lux <= 0
+    Point 2:     (level[1], value[2]):  0        < lux <= level[1]
+    Point 3:     (level[2], value[3]):  level[2] < lux <= level[3]
+    ...
+    Point N+1: (level[N], value[N+1]):  level[N] < lux
+
+    The control points must be strictly increasing.  Each control point
+    corresponds to an entry in the brightness backlight values arrays.
+    For example, if LUX == level[1] (first element of the levels array)
+    then the brightness will be determined by value[2] (second element
+    of the brightness values array).
+
+    Spline interpolation is used to determine the auto-brightness
+    backlight values for LUX levels between these control points.
+
+    Must be overridden in platform specific overlays -->
+    <integer-array name="config_autoBrightnessLevels">
+        <item>1</item>
+        <item>2</item>
+        <item>5</item>
+        <item>10</item>
+        <item>29</item>
+        <item>50</item>
+        <item>90</item>
+        <item>100</item>
+        <item>150</item>
+        <item>200</item>
+        <item>300</item>
+        <item>400</item>
+        <item>500</item>
+        <item>800</item>
+        <item>1000</item>
+        <item>1300</item>
+        <item>1500</item>
+        <item>1800</item>
+        <item>2000</item>
+        <item>3000</item>
+        <item>4000</item>
+        <item>8000</item>
+    </integer-array>
+
+    <!-- Array of output values for LCD backlight corresponding to the LUX values
+    in the config_autoBrightnessLevels array.  This array should have size one greater
+    than the size of the config_autoBrightnessLevels array.
+    The brightness values must be between 0 and 255 and be non-decreasing.
+    This must be overridden in platform specific overlays -->
+    <integer-array name="config_autoBrightnessLcdBacklightValues">
+        <item>2</item>    <!-- 3 nits -->
+        <item>6</item>    <!-- 10 nits -->
+        <item>11</item>   <!-- 20 nits -->
+        <item>28</item>   <!-- 50 nits -->
+        <item>40</item>   <!-- 70 nits -->
+        <item>48</item>   <!-- 85 nits -->
+        <item>62</item>   <!-- 110 nits -->
+        <item>74</item>   <!-- 130 nits -->
+        <item>85</item>   <!-- 150 nits -->
+        <item>102</item>  <!-- 180 nits -->
+        <item>102</item>  <!-- 180 nits -->
+        <item>102</item>  <!-- 180 nits -->
+        <item>102</item>  <!-- 180 nits -->
+        <item>128</item>  <!-- 225 nits -->
+        <item>153</item>  <!-- 270 nits -->
+        <item>170</item>  <!-- 300 nits -->
+        <item>179</item>  <!-- 315 nits -->
+        <item>187</item>  <!-- 330 nits -->
+        <item>215</item>  <!-- 380 nits -->
+        <item>238</item>  <!-- 420 nits -->
+        <item>255</item>  <!-- 450 nits -->
+        <item>255</item>  <!-- 450 nits -->
+        <item>255</item>  <!-- 450 nits -->
+    </integer-array>
+
+    <!-- Screen brightness used to dim the screen when the user activity
+    timeout expires.  May be less than the minimum allowed brightness setting
+    that can be set by the user. -->
+    <integer name="config_screenBrightnessDim">4</integer>
+
+    <!-- Minimum screen brightness setting allowed by the power manager.
+    The user is forbidden from setting the brightness below this level. -->
+    <integer name="config_screenBrightnessSettingMinimum">2</integer>
+
     <!-- Whether device supports double tap to wake -->
     <bool name="config_supportDoubleTapWake">true</bool>
 </resources>

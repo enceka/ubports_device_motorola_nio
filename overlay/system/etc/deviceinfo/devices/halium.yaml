@@ -8,6 +8,8 @@ nio:
     - Portrait
     - Landscape
     - InvertedLandscape
+  BacklightSysfsPath:
+    - "/sys/class/backlight/panel0-backlight"
   DoubleTapToWake:
     - "/sys/class/touchscreen/primary/gesture|49|48"
   FlashlightSysfsPath:
