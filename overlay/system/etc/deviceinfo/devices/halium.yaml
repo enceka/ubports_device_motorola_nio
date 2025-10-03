@@ -1,9 +1,7 @@
-FP4:
-  Names:
-    - fp4
-    - FP4
-    - Fairphone 4
-  PrettyName: Fairphone 4
+nio:
+  Vendor: Motorola
+  codename: nio
+  PrettyName: Motorola Edge S
   DeviceType: phone
   GridUnit: 21
   SupportedOrientations:
