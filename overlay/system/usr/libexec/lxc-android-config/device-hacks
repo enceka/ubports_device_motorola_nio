@@ -1,5 +1,32 @@
 #!/bin/sh
 
+# Load device-specific kernel modules (audio)
+for mod in adsp_loader_dlkm apr_dlkm bolero_cdc_dlkm hdmi_dlkm machine_dlkm \
+           mbhc_dlkm native_dlkm pinctrl_lpi_dlkm pinctrl_wcd_dlkm platform_dlkm \
+           q6_dlkm q6_notifier_dlkm q6_pdr_dlkm rx_macro_dlkm snd_event_dlkm \
+           stub_dlkm swr_ctrl_dlkm swr_dlkm tx_macro_dlkm usf_dlkm va_macro_dlkm \
+           wcd938x_dlkm wcd938x_slave_dlkm wcd9xxx_dlkm wcd_core_dlkm \
+           wsa881x_dlkm wsa_macro_dlkm; do
+    modprobe $mod || echo "Failed to load $mod"
+done
+
+# Load device-specific kernel modules (misc)
+for mod in exfat \
+           wl2864c qpnp_smbcharger_mmi qpnp_power_on_mmi qpnp_adaptive_charge  \
+           sx933x_sar aw882xx_k419 aw8695 sensors_class stmvl53l1 cci_intf; do
+    modprobe $mod || echo "Failed to load $mod"
+done
+
+modprobe nova_0flash_mmi # device.rc for touchscreen
+
+# Wait for the property system to be up.
+while [ ! -e /dev/socket/property_service ]; do sleep 0.1; done
+
+# Wait for nvram to be loaded to prevent kerne panic caused by wlan
+sleep 10
+
+modprobe wlan # target.rc
+
 if [ ! -e /dev/ipa ]; then
     exit 0
 fi
